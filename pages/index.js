@@ -1,29 +1,24 @@
 import React, { useEffect } from "react";
-import LayoutHome from "../components/layout/Home";
-import { Grid, Typography } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import SearchBar from "../components/jumbotron/SearchBar";
 import Home from "../components/home";
 import Dashboard from "../components/dashboard";
 import { AuthContext } from "../src/Provider";
+import LayoutHome from "../components/layout/Home";
+import Layout from "../components/layout";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    width: "100%",
-    padding: "0 2.5% 3% 2.5%",
-    minHeight: "30vh",
-    backgroundColor: "#E5E5E5",
-    zIndex: 999,
-    marginTop: -theme.spacing(7.6),
-    [theme.breakpoints.down("xs")]: {
-      padding: "20px 1% 20px 1%",
+  root: {
+    minHeight: "90.5vh",
+    [theme.breakpoints.down("md")]: {
+      minHeight: "91.7vh",
     },
-  },
-  title: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(3),
-    fontSize: 48,
-    fontWeight: 900,
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "91.7vh",
+    },
+    [theme.breakpoints.down("xs")]: {
+      minHeight: "93.3vh",
+    },
   },
 }));
 
@@ -36,5 +31,19 @@ export default function Index() {
     window.scrollTo(0, 0);
   }, []);
 
-  return <>{user.token ? <Dashboard /> : <Home />}</>;
+  return (
+    <>
+      {user.token ? (
+        <Layout>
+          <Box variant="div" className={classes.root}>
+            <Dashboard />
+          </Box>
+        </Layout>
+      ) : (
+        <LayoutHome>
+          <Home />
+        </LayoutHome>
+      )}
+    </>
+  );
 }

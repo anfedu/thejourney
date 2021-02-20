@@ -141,7 +141,7 @@ export function CardTrip({ item, index, user }) {
           className={classes.title}
           onClick={handleDetail}
         >
-          {item.title}
+          {formatString(item.title, 23)}
         </Typography>
         <Typography
           variant="body2"

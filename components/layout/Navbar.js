@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       position: "absolute",
       left: -5,
+      top: "1.3%",
     },
   },
   linkWrap: {

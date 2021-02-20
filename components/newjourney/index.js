@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import dynamic from "next/dynamic";
 import Alert from "@material-ui/lab/Alert";
 import { Typography, Box, TextField, Grid } from "@material-ui/core";
+import FormAddtripSkeleton from "../skeleton/FormAddtripSkeleton";
 
 const Editor = dynamic(() => import("./Editor"), {
   ssr: false,
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function index() {
   const classes = useStyles();
+  const [loading, setLoading] = React.useState(true);
   const [alert, setAlert] = React.useState({
     error: "",
     success: "",
@@ -83,66 +85,78 @@ export default function index() {
     const value = e.target.value;
     setValues({ ...values, [target]: value });
   };
+  setTimeout(() => {
+    setLoading(false);
+  }, 1300);
+
   return (
     <Box variant="div" className={classes.root}>
-      <Grid container spacing={0} justify="center">
-        <Grid item xs={12} sm={11} lg={12}>
-          <Typography variant="h1" className={classes.title}>
-            New Journey
-          </Typography>
+      {loading ? (
+        <>
+          <br />
+          <FormAddtripSkeleton />
+        </>
+      ) : (
+        <Grid container spacing={0} justify="center">
+          <Grid item xs={12} sm={11} lg={12}>
+            <Typography variant="h1" className={classes.title}>
+              New Journey
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={11} lg={10} className={classes.textfieldWrap}>
+            {alert.error !== undefined &&
+              Object.values(alert.error).length > 0 && (
+                <Alert severity="error" onClose={() => setAlert({ error: "" })}>
+                  {alert.error}
+                </Alert>
+              )}
+            {alert.success !== undefined &&
+              Object.values(alert.success).length > 0 && (
+                <Alert
+                  severity="success"
+                  onClose={() => setAlert({ success: "" })}
+                >
+                  {alert.success}
+                </Alert>
+              )}
+            <label className={classes.label}>Title</label>
+            <TextField
+              variant="outlined"
+              fullWidth
+              size="small"
+              required
+              id="title"
+              type="text"
+              error={
+                values.error !== undefined &&
+                Object.values(alert.error).length > 0
+                  ? true
+                  : false
+              }
+              value={values.title}
+              onChange={onChange}
+              name="title"
+              autoComplete="title"
+              InputLabelProps={{
+                classes: {
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                },
+              }}
+              InputProps={{
+                classes: {
+                  root: classes.cssOutlinedInput,
+                  focused: classes.cssFocused,
+                  notchedOutline: classes.notchedOutline,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={11} lg={10}>
+            <Editor values={values} setValues={setValues} setAlert={setAlert} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={11} lg={10} className={classes.textfieldWrap}>
-          {alert.error !== undefined && Object.values(alert.error).length > 0 && (
-            <Alert severity="error" onClose={() => setAlert({ error: "" })}>
-              {alert.error}
-            </Alert>
-          )}
-          {alert.success !== undefined &&
-            Object.values(alert.success).length > 0 && (
-              <Alert
-                severity="success"
-                onClose={() => setAlert({ success: "" })}
-              >
-                {alert.success}
-              </Alert>
-            )}
-          <label className={classes.label}>Title</label>
-          <TextField
-            variant="outlined"
-            fullWidth
-            size="small"
-            required
-            id="title"
-            type="text"
-            error={
-              values.error !== undefined &&
-              Object.values(alert.error).length > 0
-                ? true
-                : false
-            }
-            value={values.title}
-            onChange={onChange}
-            name="title"
-            autoComplete="title"
-            InputLabelProps={{
-              classes: {
-                root: classes.cssLabel,
-                focused: classes.cssFocused,
-              },
-            }}
-            InputProps={{
-              classes: {
-                root: classes.cssOutlinedInput,
-                focused: classes.cssFocused,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={11} lg={10}>
-          <Editor values={values} setValues={setValues} setAlert={setAlert} />
-        </Grid>
-      </Grid>
+      )}
     </Box>
   );
 }

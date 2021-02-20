@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import LayoutHome from "../layout/Home";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import SearchBar from "../jumbotron/SearchBar";
@@ -32,13 +31,11 @@ export default function Index() {
   }, []);
 
   return (
-    <LayoutHome>
-      <Grid container spacing={0} className={classes.container}>
-        <Typography variant="h3" className={classes.title}>
-          Journey
-        </Typography>
-        <SearchBar />
-      </Grid>
-    </LayoutHome>
+    <Grid container spacing={0} className={classes.container}>
+      <Typography variant="h3" className={classes.title}>
+        Journey
+      </Typography>
+      <SearchBar />
+    </Grid>
   );
 }
