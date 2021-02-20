@@ -6,7 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import { AuthProvider } from "../src/Provider";
 import { QueryProvider } from "../src/Query";
-// import "../src/onHoverStyle.css";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;

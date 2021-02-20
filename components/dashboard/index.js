@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import Layout from "../layout";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import SearchBar from "../jumbotron/SearchBar";
+import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
-    padding: "5% 2.5% 3% 2.5%",
+    padding: "3% 2.5% 3% 2.5%",
     minHeight: "80vh",
     backgroundColor: "#E5E5E5",
     zIndex: 999,

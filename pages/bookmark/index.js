@@ -1,9 +1,7 @@
 import React from "react";
-import Profile from "../../components/profile";
-import Layout from "../../components/layout";
-import { useRouter } from "next/router";
-import { AuthContext } from "../../src/Provider";
 import { makeStyles } from "@material-ui/core/styles";
+import Layout from "../../components/layout";
+import Bookmark from "../../components/bookmark";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,14 +13,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function index() {
-  const context = React.useContext(AuthContext);
   const classes = useStyles();
-  const { user } = context;
-  const router = useRouter();
   return (
     <Layout>
       <div className={classes.root}>
-        <Profile />
+        <Bookmark />
       </div>
     </Layout>
   );

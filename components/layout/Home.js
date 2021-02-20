@@ -7,7 +7,7 @@ import Jumbotron from "../jumbotron";
 const useStyles = makeStyles((theme) => ({
   root: {
     background:
-      "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(18,18,18,0.3) 100%), url('/jumbotron.png') no-repeat ",
+      "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(18,18,18,0.3) 100%), url('/jumbotron.png') no-repeat fixed",
     backgroundSize: "100% 510px",
     [theme.breakpoints.down("md")]: {
       background:

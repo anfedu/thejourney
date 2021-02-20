@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Drawer from "./Drawer";
 import { AuthContext } from "../../src/Provider";
-import UserMenu from "./UserMenu";
+// import UserMenu from "./UserMenu";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Link from "../../src/Link";
@@ -62,17 +62,9 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     cursor: "pointer",
-    [theme.breakpoints.down("md")]: {
-      position: "absolute",
-      left: 0,
-      top: 0,
-    },
     [theme.breakpoints.down("xs")]: {
       position: "absolute",
       left: -5,
-    },
-    [theme.breakpoints.down("sm")]: {
-      position: "absolute",
     },
   },
   linkWrap: {

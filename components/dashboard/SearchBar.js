@@ -92,8 +92,11 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     padding: "0 5%",
     marginBottom: "3%",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 1.5%",
+    },
     [theme.breakpoints.down("xs")]: {
-      padding: "0 1%",
+      padding: "0 1.5%",
     },
   },
 }));
@@ -101,25 +104,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar() {
   const errors = false;
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const ref = React.useRef();
   const [isLoading, setIsLoading] = React.useState(false);
   // const matches = theme.breakpoints.down("xs");
   const query = React.useContext(QueryContext);
-  const { state, getJourney, loading } = query;
+  const context = React.useContext(AuthContext);
+  const { user } = context;
+  const { state, getJourney, loading, dispatch } = query;
   const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({ search: "" });
-  const context = React.useContext(AuthContext);
-  const { user } = context;
 
   React.useEffect(() => {
     getJourney();
   }, []);
 
-  const rows = [...state.journey].filter((item, index) => {
-    return index < 8;
-  });
+  const rows = [...state.journey];
 
   useOutsideClick(ref, () => {
     setOpen(false);

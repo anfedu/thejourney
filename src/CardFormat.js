@@ -1,19 +1,10 @@
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import "aos/dist/aos.css";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Chip,
-  Button,
-  Box,
-  Divider,
-  IconButton,
-} from "@material-ui/core";
+import { Card, Typography, Box, IconButton } from "@material-ui/core";
 import { formatDate, formatString } from "./formatter";
-import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import SubmitBookmark from "../components/bookmark/SubmitBookmark";
 
 const useStyles = makeStyles((theme) => ({
   cardTrip: {
@@ -23,23 +14,18 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#ffffee",
     },
-    [theme.breakpoints.down("xs")]: {
-      width: "87%",
-    },
-    // animation: `$skeletons 5000ms ease`,
+    animation: `$skeletons 1.2s ease`,
   },
   "@keyframes skeletons": {
     "0%": {
-      position: "relative",
-      bottom: -300,
+      opacity: 0,
     },
     "100%": {
-      position: "relative",
-      bottom: 0,
+      opacity: 1,
     },
   },
   container: {
-    padding: "7px 9px",
+    padding: "0 9px",
   },
   media: {
     width: "100%",
@@ -51,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     textAlign: "justify",
     marginTop: 5,
+    cursor: "pointer",
   },
   description: {
     marginTop: theme.spacing(2),
@@ -73,33 +60,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: 12,
     },
-  },
-  approve: {
-    width: 115,
-    height: 24,
-    fontSize: 12,
-    borderColor: "#0ACF83",
-    color: "#0ACF83",
-    backgroundColor: "rgba(255,189,203, 0.1)",
-    borderRadius: 3,
-  },
-  danger: {
-    width: 115,
-    height: 24,
-    fontSize: 12,
-    borderColor: "#f48fb1",
-    color: "#f48fb1",
-    backgroundColor: "rgba(255,189,203, 0.1)",
-    borderRadius: 3,
-  },
-  warning: {
-    width: 115,
-    height: 24,
-    fontSize: 12,
-    borderColor: "#ffcc00",
-    color: "#ffcc00",
-    backgroundColor: "rgba(255,189,203, 0.1)",
-    borderRadius: 3,
   },
   subtitle: {
     fontFamily: "Nunito",
@@ -136,68 +96,6 @@ const useStyles = makeStyles((theme) => ({
       height: 100,
     },
   },
-  buttonImage: {
-    marginTop: 20,
-    width: 138,
-    height: 138,
-    backgroundColor: "#eee",
-    [theme.breakpoints.down("xs")]: {
-      width: 100,
-      height: 100,
-    },
-  },
-  user: {
-    fontFamily: "Nunito",
-    color: "#b1b1b1",
-    fontSize: 18,
-    marginTop: 13,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 0,
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginTop: 0,
-      fontSize: 12,
-    },
-  },
-  divider: {
-    width: 1033,
-    height: 2,
-    position: "absolute",
-    marginLeft: -33,
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  qty: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: 100,
-    fontFamily: "Nunito",
-    fontSize: 18,
-    fontWeight: 800,
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: 0,
-      width: 80,
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
-      fontSize: 12,
-      width: 50,
-    },
-  },
-  count: {
-    fontFamily: "Nunito",
-    fontSize: 18,
-    fontWeight: 800,
-    marginLeft: [theme.spacing(3)],
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: 0,
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
-      fontSize: 12,
-    },
-  },
   bookmark: {
     backgroundColor: "white",
     position: "absolute",
@@ -205,24 +103,31 @@ const useStyles = makeStyles((theme) => ({
     height: 30,
     marginTop: "0.7%",
     marginLeft: theme.spacing(32.5),
+    zIndex: 999,
     "&:hover": {
-      backgroundColor: "#ddd",
+      opacity: 0.8,
+      backgroundColor: "white",
     },
   },
 }));
 
 const url = process.env.server;
-const date = new Date();
 
-export function CardTrip({ item, index }) {
+export function CardTrip({ item, index, user }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+
+  const handleDetail = () => {
+    router.push({
+      pathname: "/journey",
+      query: { id: item.id, username: item.user.username },
+      asPath: `/journey/${item.id}`,
+    });
+  };
 
   return (
     <Card className={classes.cardTrip}>
-      <IconButton className={classes.bookmark}>
-        <img style={{ width: 20, height: 20 }} src="/bookmark.png" alt="" />
-      </IconButton>
+      <SubmitBookmark bookmark={classes.bookmark} user={user} item={item} />
       <img
         className={classes.media}
         onLoad={() => {}}
@@ -231,8 +136,12 @@ export function CardTrip({ item, index }) {
         alt=""
       />
       <Box variant="div" className={classes.container}>
-        <Typography variant="h6" className={classes.title}>
-          {formatString(item.title, 23)}
+        <Typography
+          variant="h6"
+          className={classes.title}
+          onClick={handleDetail}
+        >
+          {item.title}
         </Typography>
         <Typography
           variant="body2"
@@ -243,12 +152,30 @@ export function CardTrip({ item, index }) {
             color: "#bfbfbf",
           }}
         >
-          {formatDate(item.dateTrip)}
+          {formatDate(item.createdAt)}
         </Typography>
         <Typography variant="body1" className={classes.description}>
-          {formatString(item.description, 130)}
+          <section
+            dangerouslySetInnerHTML={{
+              __html: formatString(item.editor.replace(/<[^>]*>/g, ""), 150),
+            }}
+          />
         </Typography>
       </Box>
     </Card>
   );
 }
+// {formatString(item.editor.replace(/<p[^>]*>/g, ""), 150)}
+// <IconButton
+//   className={classes.bookmark}
+//   style={{
+//     backgroundColor: color,
+//   }}
+//   onClick={handleUpdate}
+// >
+//   {loading ? (
+//     <CircularProgress size={20} style={{ position: "absolute" }} />
+//   ) : (
+//     <img style={{ width: 20, height: 20 }} src="/bookmark.png" alt="" />
+//   )}
+// </IconButton>

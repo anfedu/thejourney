@@ -1,9 +1,8 @@
 module.exports = {
   env: {
-    // server: "https://anfdewetourapi.herokuapp.com",
-    server: "http://localhost:5000",
+    server: "https://thejourneyapi.herokuapp.com",
   },
   images: {
-    path: ["https://anfdewetourapi.herokuapp.com"],
+    path: ["https://thejourneyapi.herokuapp.com"],
   },
 };

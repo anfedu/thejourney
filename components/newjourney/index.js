@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import dynamic from "next/dynamic";
+import Alert from "@material-ui/lab/Alert";
 import { Typography, Box, TextField, Grid } from "@material-ui/core";
 
 const Editor = dynamic(() => import("./Editor"), {
@@ -10,8 +11,7 @@ const Editor = dynamic(() => import("./Editor"), {
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "81.7vh",
-    paddingTop: "2%",
-    paddingBottom: "3%",
+    padding: "2% 2.5% 3% 2.5%",
     [theme.breakpoints.down("md")]: {
       minHeight: "83vh",
     },
@@ -27,30 +27,36 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("xs")]: {
       fontSize: 28,
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
   },
   cssLabel: {
     color: "pink",
+    color: "#777",
   },
   cssOutlinedInput: {
     backgroundColor: "white",
-    height: 50,
+    fontWeight: 600,
+    color: "#777",
   },
   cssFocused: {
     fontWeight: 600,
-    border: "2px solid aqua",
     color: "#777",
+    border: "1px solid aqua",
     "&:hover": {
-      border: "2px solid aqua",
+      border: "1px solid aqua",
     },
   },
   notchedOutline: {
     borderColor: "white",
     border: "none",
+    fontWeight: 600,
+    color: "#777",
   },
   textfieldWrap: {
-    marginTop: "3%",
-    marginBottom: "1.5%",
+    marginTop: "2%",
+    marginBottom: "2%",
   },
   label: {
     fontSize: 24,
@@ -63,7 +69,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function index() {
   const classes = useStyles();
-  const errors = false;
+  const [alert, setAlert] = React.useState({
+    error: "",
+    success: "",
+  });
   const [values, setValues] = React.useState({
     title: "",
     image: "",
@@ -77,20 +86,40 @@ export default function index() {
   return (
     <Box variant="div" className={classes.root}>
       <Grid container spacing={0} justify="center">
-        <Grid item xs={12} sm={11} lg={10}>
+        <Grid item xs={12} sm={11} lg={12}>
           <Typography variant="h1" className={classes.title}>
             New Journey
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={11} lg={9} className={classes.textfieldWrap}>
+        <Grid item xs={12} sm={11} lg={10} className={classes.textfieldWrap}>
+          {alert.error !== undefined && Object.values(alert.error).length > 0 && (
+            <Alert severity="error" onClose={() => setAlert({ error: "" })}>
+              {alert.error}
+            </Alert>
+          )}
+          {alert.success !== undefined &&
+            Object.values(alert.success).length > 0 && (
+              <Alert
+                severity="success"
+                onClose={() => setAlert({ success: "" })}
+              >
+                {alert.success}
+              </Alert>
+            )}
           <label className={classes.label}>Title</label>
           <TextField
             variant="outlined"
             fullWidth
+            size="small"
             required
             id="title"
             type="text"
-            error={errors ? true : false}
+            error={
+              values.error !== undefined &&
+              Object.values(alert.error).length > 0
+                ? true
+                : false
+            }
             value={values.title}
             onChange={onChange}
             name="title"
@@ -110,8 +139,8 @@ export default function index() {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={11} lg={9}>
-          <Editor values={values} setValues={setValues} />
+        <Grid item xs={12} sm={11} lg={10}>
+          <Editor values={values} setValues={setValues} setAlert={setAlert} />
         </Grid>
       </Grid>
     </Box>

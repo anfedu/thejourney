@@ -86,6 +86,9 @@ export default function ModalLogin({ open, setOpen }) {
     const url = `${process.env.server}/api/v1/${
       open.login ? "login" : "register"
     }`;
+    // const url = `http://localhost:5000/api/v1/${
+    //   open.login ? "login" : "register"
+    // }`;
     const config = {
       method: "POST",
       headers: {

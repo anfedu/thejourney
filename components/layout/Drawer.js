@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   register: {
-    backgroundColor: "#ffaf00",
+    backgroundColor: "#2E86DE",
     color: "white",
     textTransform: "none",
     height: 30,
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     fontFamily: "Open Sans",
     "&:hover": {
-      backgroundColor: "#ffaf00",
+      backgroundColor: "#2E86DE",
       border: "none",
     },
   },

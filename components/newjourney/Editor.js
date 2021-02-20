@@ -1,11 +1,10 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw, convertFromHTML } from "draft-js";
-// import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import ButtonSubmit from "./ButtomSubmit";
 
 const Editor = dynamic(
   async () => {
@@ -21,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
   editor: {
     padding: "0 1%",
     backgroundColor: "white",
-    minHeight: 215,
+    minHeight: 190,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
+    color: "#777",
   },
   toolbar: {
     borderTopLeftRadius: 5,
@@ -32,26 +32,23 @@ const useStyles = makeStyles((theme) => ({
   },
   popupImage: {
     position: "absolute",
-    [theme.breakpoints.down("sm")]: {
-      left: "-500%",
-    },
     [theme.breakpoints.down("xs")]: {
-      left: "-250%",
+      left: "-150%",
     },
   },
   image: {},
 }));
 
-const EditorContainer = ({ values, setValues }) => {
+const EditorContainer = ({ values, setValues, setAlert }) => {
   const classes = useStyles();
-  const theme = useTheme();
+  const [files, setFiles] = React.useState(null);
 
-  const [editorState, setEditorState] = React.useState("");
-  const editor = React.useRef(null);
-  let isImageAdded = false;
+  const [state, setState] = React.useState({
+    editorState: EditorState.createEmpty(),
+  });
 
   const uploadImageCallBack = (file) => {
-    setValues({ ...values, image: file });
+    setFiles(file);
     const imageObject = {
       file: file,
       localSrc: URL.createObjectURL(file),
@@ -66,28 +63,24 @@ const EditorContainer = ({ values, setValues }) => {
   };
 
   const onEditorStateChangeCallback = (editorState) => {
-    if (isImageAdded) {
-      // setSelection();
-      isImageAdded = false;
-    }
-    setEditorState(editorState);
+    setState({ editorState });
+    let data = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    setValues({ ...values, editor: data });
   };
+
+  const { editorState } = state;
   return (
     <div>
       <Editor
         editorState={editorState}
-        ref={editor}
         toolbar={{
-          options: ["inline", "textAlign", "image"],
+          options: ["inline", "blockType", "image", "textAlign"],
           image: {
             uploadCallback: uploadImageCallBack,
+            defaultSize: { width: "100%", height: 300 },
             previewImage: false,
             inputAccept: "image/gif,image/jpeg,image/jpg,image/png,image/svg",
-            defaultSize: {
-              height: 300,
-              width: 450,
-            },
-            alt: { present: false, mandatory: false },
+            alt: { present: true, mandatory: false },
             popupClassName: classes.popupImage,
             className: classes.image,
           },
@@ -97,10 +90,17 @@ const EditorContainer = ({ values, setValues }) => {
         editorClassName={classes.editor}
         toolbarClassName={classes.toolbar}
       />
+      <ButtonSubmit
+        values={values}
+        files={files}
+        setAlert={setAlert}
+        setValues={setValues}
+        setFiles={setFiles}
+        setState={setState}
+        EditorState={EditorState}
+      />
     </div>
   );
 };
 
-export default function NewJourney({ values, setValues }) {
-  return <EditorContainer values={values} setValues={setValues} />;
-}
+export default EditorContainer;

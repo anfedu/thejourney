@@ -4,18 +4,14 @@ import { Grid, Typography, Button } from "@material-ui/core";
 import CardProfile from "./CardProfile";
 import { QueryContext } from "../../src/Query";
 import { AuthContext } from "../../src/Provider";
+import History from "./History";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#E5E5E5",
-    padding: "100px 13vh",
-    // minHeight: "81.9vh",
+    padding: "2% 2.5% 3% 2.5%",
     [theme.breakpoints.down("sm")]: {
-      minHeight: "82.99vh",
-      padding: "90px 1vh",
-    },
-    [theme.breakpoints.down("xs")]: {
-      minHeight: "87.1vh",
+      padding: "30px 2%",
     },
   },
   button: {
@@ -27,6 +23,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     fontWeight: "bold",
   },
+  title: {
+    fontSize: 48,
+    fontWeight: 900,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 36,
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 28,
+    },
+  },
 }));
 
 export default function Admin() {
@@ -34,15 +40,27 @@ export default function Admin() {
   const context = React.useContext(AuthContext);
   const query = React.useContext(QueryContext);
   const { user, login } = context;
-  const { getTransactionUser, state } = query;
+  const { getJourneyUser, state, loading } = query;
+  const [rows, setRows] = React.useState([]);
   React.useEffect(() => {
     if (user) {
-      getTransactionUser(user.id);
+      getJourneyUser(parseInt(user.id));
     }
   }, [user]);
+  React.useEffect(() => {
+    if (state.journeyUser) {
+      setRows(state.journeyUser);
+    }
+  }, [state.journeyUser]);
   return (
     <Grid className={classes.root} container spacing={0} justify="center">
+      <Grid item xs={12} sm={12} md={12} lg={12}>
+        <Typography variant="h1" className={classes.title}>
+          Profile
+        </Typography>
+      </Grid>
       <CardProfile user={user} login={login} />
+      <History rows={rows} user={user} loading={loading} />
     </Grid>
   );
 }

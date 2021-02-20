@@ -1,40 +1,33 @@
 import React, { useReducer, createContext, useState } from "react";
 
-// const url = "https://anfdewetourapi.herokuapp.com"
-
 const QueryContext = createContext({
   user: null,
-  getCountry: () => {},
-  getTransaction: () => {},
+  getJourney: () => {},
+  getJourneyUser: () => {},
 });
 
 // <--- get meta data
 function queryReducer(state, action) {
   switch (action.type) {
-    case "COUNTRY":
+    case "JOURNEY":
       return {
         ...state,
-        country: action.payload,
+        journey: action.payload,
       };
-    case "TRIPS":
+    case "JOURNEYDETAIL":
       return {
         ...state,
-        trips: action.payload,
+        journeyDetail: action.payload,
       };
-    case "TRIP":
+    case "JOURNEYUSER":
       return {
         ...state,
-        trip: action.payload,
+        journeyUser: action.payload,
       };
-    case "TRANSACTION":
+    case "JOURNEYBOOKMARK":
       return {
         ...state,
-        transaction: action.payload,
-      };
-    case "TRANSACTIONUSER":
-      return {
-        ...state,
-        transactionUser: action.payload,
+        journeyBookmark: action.payload,
       };
     default:
       return state;
@@ -43,22 +36,23 @@ function queryReducer(state, action) {
 function QueryProvider(props) {
   const [loading, setLoading] = useState(false);
   const [state, dispatch] = useReducer(queryReducer, {
-    country: [],
-    trips: [],
-    trip: {},
-    transaction: [],
-    transactionUser: [],
+    journey: [],
+    journeyDetail: {},
+    journeyUser: [],
+    journeyBookmark: [],
   });
 
   const toJSON = (_) => _.json();
+  // const url = "http://localhost:5000";
+  const url = process.env.server;
 
-  const getCountry = async () => {
+  const getJourney = async () => {
     setLoading(true);
-    await fetch(`${process.env.server}/api/v1/country`)
+    await fetch(`${url}/api/v1/journey`)
       .then(toJSON)
       .then((data) => {
         dispatch({
-          tyle: "COUNTRY",
+          type: "JOURNEY",
           payload: data.data,
         });
       })
@@ -68,31 +62,13 @@ function QueryProvider(props) {
     setLoading(false);
   };
 
-  const getTrips = async () => {
+  const getJourneyDetail = async (id) => {
     setLoading(true);
-    await fetch(`${process.env.server}/api/v1/trip`)
-      .then(toJSON)
-      .then((data) => {
-        if (data !== undefined) {
-          dispatch({
-            type: "TRIPS",
-            payload: data.data,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setLoading(false);
-  };
-
-  const getTrip = async (id) => {
-    setLoading(true);
-    await fetch(`https://anfdewetourapi.herokuapp.com/api/v1/trip/${id}`)
+    await fetch(`${url}/api/v1/journey/${id}`)
       .then(toJSON)
       .then((data) => {
         dispatch({
-          type: "TRIP",
+          type: "JOURNEYDETAIL",
           payload: data.data,
         });
       })
@@ -102,13 +78,20 @@ function QueryProvider(props) {
     setLoading(false);
   };
 
-  const getTransaction = async () => {
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTM3NDA1MzJ9.rV2dlsXGf1xoUzxbMQBAbxbgJW2q1gEu0HfM6lBxgvI";
+  const getJourneyUser = async (id) => {
     setLoading(true);
-    await fetch(`${process.env.server}/api/v1/transaction`)
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await fetch(`${url}/api/v1/journeyuser/${id}`, config)
       .then(toJSON)
       .then((data) => {
         dispatch({
-          type: "TRANSACTION",
+          type: "JOURNEYUSER",
           payload: data.data,
         });
       })
@@ -118,13 +101,18 @@ function QueryProvider(props) {
     setLoading(false);
   };
 
-  const getTransactionUser = async (id) => {
+  const getJourneyBookmark = async (id) => {
     setLoading(true);
-    await fetch(`${process.env.server}/api/v1/transactionuser/${id}`)
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await fetch(`${url}/api/v1/journeybookmark/${id}`, config)
       .then(toJSON)
       .then((data) => {
         dispatch({
-          type: "TRANSACTIONUSER",
+          type: "JOURNEYBOOKMARK",
           payload: data.data,
         });
       })
@@ -141,11 +129,10 @@ function QueryProvider(props) {
         setLoading,
         state,
         dispatch,
-        getCountry,
-        getTrips,
-        getTrip,
-        getTransaction,
-        getTransactionUser,
+        getJourney,
+        getJourneyUser,
+        getJourneyDetail,
+        getJourneyBookmark,
       }}
       {...props}
     />

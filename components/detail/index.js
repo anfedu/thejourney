@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import Content from "./Content";
-import Information from "./Information";
 import { useRouter } from "next/router";
 import { QueryContext } from "../../src/Query";
 import CardDetailSkeleton from "../skeleton/CardDetailSkeleton";
@@ -10,7 +9,7 @@ import CardDetailSkeleton from "../skeleton/CardDetailSkeleton";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#E5E5E5",
-    padding: "70px 26.5vh",
+    padding: "50px 9%",
     // minHeight: "81.9vh",
     [theme.breakpoints.down("md")]: {
       minHeight: "82.99vh",
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    fontSize: 36,
+    fontSize: 48,
     fontWeight: "bold",
     [theme.breakpoints.down("xs")]: { fontSize: 25 },
   },
@@ -48,15 +47,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Detail() {
   const classes = useStyles();
   const router = useRouter();
-  const query = router.query.index;
+  const query = router.query.id;
   const context = React.useContext(QueryContext);
-  const { state, getTrip, loading, setLoading } = context;
-  const item = state.trip;
+  const { state, getJourneyDetail, loading } = context;
+  const item = state.journeyDetail;
 
   React.useEffect(() => {
     if (query) {
-      setLoading(true);
-      getTrip(query);
+      getJourneyDetail(query);
     }
   }, [query]);
 
@@ -67,7 +65,6 @@ export default function Detail() {
       ) : (
         <Box variant="div">
           <Content item={item} />
-          <Information item={item} />
         </Box>
       )}
     </Box>

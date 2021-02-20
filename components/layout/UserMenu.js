@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: { marginLeft: 20 },
+  iconLogout: {
+    marginLeft: "3.4%",
+    [theme.breakpoints.down("xs")]: { marginLeft: " 7.3%" },
+  },
   menuItem: {
     "&:hover": {
       backgroundColor: "#444",
@@ -160,83 +164,46 @@ export default function UserMenu({ user, logout, drawerState }) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  {user.role === "Admin" ? (
-                    <Box variant="div">
-                      <MenuItem
-                        component={Link}
-                        href="/trip"
-                        onClick={handleClose}
-                        style={{ marginTop: 5 }}
-                      >
-                        <img
-                          src="/journey.png"
-                          className={classes.icon}
-                          alt=""
-                        />{" "}
-                        <span className={classes.menu}>Trip</span>
-                      </MenuItem>
-                      <Divider
-                        style={{ height: 3, marginTop: 15, marginBottom: 10 }}
-                      />
-                      <MenuItem onClick={handleLogout}>
-                        <img
-                          src="/logout.png"
-                          className={classes.icon}
-                          alt=""
-                        />{" "}
-                        <span className={classes.menu}>Logout</span>
-                      </MenuItem>
-                    </Box>
-                  ) : (
-                    <Box variant="div">
-                      <MenuItem
-                        component={Link}
-                        href={`/profile`}
-                        onClick={handleClose}
-                        style={{
-                          marginTop: 10,
-                        }}
-                      >
-                        <img src="/user.png" className={classes.icon} alt="" />{" "}
-                        <span className={classes.menu}>Profile</span>
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        href={`/newjourney`}
-                        onClick={handleClose}
-                      >
-                        <img
-                          src="/journey.png"
-                          className={classes.icon}
-                          alt=""
-                        />{" "}
-                        <span className={classes.menu}>New Journey</span>
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        href={`/bookmark`}
-                        onClick={handleClose}
-                      >
-                        <img
-                          src="/bookmark.png"
-                          className={classes.icon}
-                          alt=""
-                        />{" "}
-                        <span className={classes.menu}>Bookmark</span>
-                      </MenuItem>
-                      <Divider
-                        style={{ height: 3, marginTop: 20, marginBottom: 10 }}
-                      />
-                      <MenuItem onClick={handleLogout}>
-                        <img
-                          src="/logout.png"
-                          className={classes.icon}
-                          alt=""
-                        />{" "}
-                        <span className={classes.menu}>Logout</span>
-                      </MenuItem>
-                    </Box>
-                  )}
+                  <Box variant="div">
+                    <MenuItem
+                      component={Link}
+                      href={`/profile`}
+                      onClick={handleClose}
+                      style={{
+                        marginTop: 10,
+                      }}
+                    >
+                      <img src="/user.png" className={classes.icon} alt="" />{" "}
+                      <span className={classes.menu}>Profile</span>
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      href={`/newjourney`}
+                      onClick={handleClose}
+                    >
+                      <img src="/journey.png" className={classes.icon} alt="" />{" "}
+                      <span className={classes.menu}>New Journey</span>
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      href={`/bookmark`}
+                      onClick={handleClose}
+                    >
+                      <img
+                        src="/bookmark.png"
+                        className={classes.icon}
+                        alt=""
+                      />{" "}
+                      <span className={classes.menu}>Bookmark</span>
+                    </MenuItem>
+                    <Divider
+                      style={{ height: 3, marginTop: 20, marginBottom: 10 }}
+                    />
+                    <MenuItem onClick={handleLogout}>
+                      <img src="/logout.png" className={classes.icon} alt="" />{" "}
+                      <span className={classes.menu}>Logout</span>
+                    </MenuItem>
+                  </Box>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
@@ -250,48 +217,40 @@ export default function UserMenu({ user, logout, drawerState }) {
             id="menu-list-grow"
             onKeyDown={handleListKeyDown}
           >
-            {user.role === "Admin" ? (
-              <Box variant="div">
-                <MenuItem
-                  component={Link}
-                  href="/trip"
-                  className={classes.menuItem}
-                  onClick={handleClose}
-                >
-                  <img src="/journey.png" alt="" />{" "}
-                  <span className={classes.menu}>Trip</span>
-                </MenuItem>
-                <MenuItem className={classes.menuItem} onClick={handleLogout}>
-                  <img src="/logout.png" alt="" />{" "}
-                  <span className={classes.menu}>Logout</span>
-                </MenuItem>
-              </Box>
-            ) : (
-              <Box variant="div">
-                <MenuItem
-                  component={Link}
-                  href={`/profile`}
-                  className={classes.menuItem}
-                  onClick={handleClose}
-                >
-                  <img src="/user.png" alt="" />{" "}
-                  <span className={classes.menu}>Profile</span>
-                </MenuItem>
-                <MenuItem
-                  component={Link}
-                  href={`/pay`}
-                  className={classes.menuItem}
-                  onClick={handleClose}
-                >
-                  <img src="/bill.png" alt="" />{" "}
-                  <span className={classes.menu}>Pay</span>
-                </MenuItem>
-                <MenuItem className={classes.menuItem} onClick={handleLogout}>
-                  <img src="/logout.png" alt="" />{" "}
-                  <span className={classes.menu}>Logout</span>
-                </MenuItem>
-              </Box>
-            )}
+            <Box variant="div">
+              <MenuItem
+                component={Link}
+                href={`/profile`}
+                onClick={handleClose}
+                className={classes.menuItem}
+              >
+                <img src="/user.png" className={classes.icon} alt="" />{" "}
+                <span className={classes.menu}>Profile</span>
+              </MenuItem>
+              <MenuItem
+                component={Link}
+                href={`/newjourney`}
+                onClick={handleClose}
+                className={classes.menuItem}
+              >
+                <img src="/journey.png" className={classes.icon} alt="" />{" "}
+                <span className={classes.menu}>New Journey</span>
+              </MenuItem>
+              <MenuItem
+                component={Link}
+                href={`/bookmark`}
+                onClick={handleClose}
+                className={classes.menuItem}
+              >
+                <img src="/bookmark.png" className={classes.icon} alt="" />{" "}
+                <span className={classes.menu}>Bookmark</span>
+              </MenuItem>
+              <Divider />
+              <MenuItem className={classes.menuItem} onClick={handleLogout}>
+                <img src="/logout.png" className={classes.iconLogout} alt="" />{" "}
+                <span className={classes.menu}>Logout</span>
+              </MenuItem>
+            </Box>
           </MenuList>
         </ClickAwayListener>
       </Paper>
