@@ -53,7 +53,7 @@ export default function Admin() {
     }
   }, [state.journeyUser]);
   return (
-    <Grid className={classes.root} container spacing={0} justify="center">
+    <Grid className={classes.root} container spacing={0}>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <Typography variant="h1" className={classes.title}>
           Profile
