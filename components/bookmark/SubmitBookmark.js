@@ -12,7 +12,6 @@ export default function SubmitBookmark({ bookmark, user, item }) {
   const { dispatch, state } = query;
   const rows = [...state.journey];
   const rowsBookmark = [...state.journeyBookmark];
-  console.log(user, "iki user");
 
   function removeItemOnce(arr) {
     var findIndex = arr.findIndex((d) => d.id === item.id);

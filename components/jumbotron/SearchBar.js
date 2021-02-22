@@ -106,7 +106,7 @@ export default function SearchBar() {
   const [isLoading, setIsLoading] = React.useState(false);
   // const matches = theme.breakpoints.down("xs");
   const query = React.useContext(QueryContext);
-  const { state, getJourney, loading } = query;
+  const { state, getJourneyUser, loading } = query;
   const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({ search: "" });
@@ -114,10 +114,10 @@ export default function SearchBar() {
   const { user } = context;
 
   React.useEffect(() => {
-    getJourney();
+    getJourneyUser(1);
   }, []);
 
-  const rows = [...state.journey].filter((item, index) => {
+  const rows = [...state.journeyUser].filter((item, index) => {
     return index < 8;
   });
 
