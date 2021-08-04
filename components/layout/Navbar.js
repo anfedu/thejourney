@@ -102,40 +102,38 @@ export default function Navbar({}) {
       position="relative"
       className={classes.appbar}
     >
-      <Container>
-        <Toolbar className={classes.toolbar}>
-          <Link href="/">
-            <img
-              src="/Icon.png"
-              className={classes.icon}
-              alt="The journey icon"
-            />
-          </Link>
-          <Box className={classes.linkWrap}>
-            <Button
-              variant="contained"
-              className={classes.login}
-              onClick={handleClickLogin}
-            >
-              Login
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.register}
-              onClick={handleClickRegister}
-            >
-              Register
-            </Button>
-          </Box>
-          <Drawer
-            user={user}
-            logout={logout}
-            handleClickLogin={handleClickLogin}
-            handleClickRegister={handleClickRegister}
+      <Toolbar className={classes.toolbar}>
+        <Link href="/">
+          <img
+            src="/Icon.png"
+            className={classes.icon}
+            alt="The journey icon"
           />
-          <ModalNoSsr open={open} setOpen={setOpen} />
-        </Toolbar>
-      </Container>
+        </Link>
+        <Box className={classes.linkWrap}>
+          <Button
+            variant="contained"
+            className={classes.login}
+            onClick={handleClickLogin}
+          >
+            Login
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.register}
+            onClick={handleClickRegister}
+          >
+            Register
+          </Button>
+        </Box>
+        <Drawer
+          user={user}
+          logout={logout}
+          handleClickLogin={handleClickLogin}
+          handleClickRegister={handleClickRegister}
+        />
+        <ModalNoSsr open={open} setOpen={setOpen} />
+      </Toolbar>
     </AppBar>
   );
 }
