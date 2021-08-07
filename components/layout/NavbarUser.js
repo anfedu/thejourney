@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Drawer from "./Drawer";
 import { AuthContext } from "../../src/Provider";
@@ -106,46 +105,40 @@ export default function Navbar({}) {
       position="relative"
       className={classes.appbar}
     >
-      <Container>
-        <Toolbar className={classes.toolbar}>
-          <Link href="/">
-            <img
-              src="/Icon2.png"
-              className={classes.icon}
-              alt="dewe tour icon"
-            />
-          </Link>
-          <Box className={classes.linkWrap}>
-            {Object.values(user)[0] !== null ? (
-              <UserMenu user={user} logout={logout} drawerState="" />
-            ) : (
-              <>
-                <Button
-                  variant="contained"
-                  className={classes.login}
-                  onClick={handleClickLogin}
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="contained"
-                  className={classes.register}
-                  onClick={handleClickRegister}
-                >
-                  Register
-                </Button>
-              </>
-            )}
-          </Box>
-          <Drawer
-            user={user}
-            logout={logout}
-            handleClickLogin={handleClickLogin}
-            handleClickRegister={handleClickRegister}
-          />
-          <ModalNoSsr open={open} setOpen={setOpen} />
-        </Toolbar>
-      </Container>
+      <Toolbar className={classes.toolbar}>
+        <Link href="/">
+          <img src="/Icon2.png" className={classes.icon} alt="dewe tour icon" />
+        </Link>
+        <Box className={classes.linkWrap}>
+          {Object.values(user)[0] !== null ? (
+            <UserMenu user={user} logout={logout} drawerState="" />
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                className={classes.login}
+                onClick={handleClickLogin}
+              >
+                Login
+              </Button>
+              <Button
+                variant="contained"
+                className={classes.register}
+                onClick={handleClickRegister}
+              >
+                Register
+              </Button>
+            </>
+          )}
+        </Box>
+        <Drawer
+          user={user}
+          logout={logout}
+          handleClickLogin={handleClickLogin}
+          handleClickRegister={handleClickRegister}
+        />
+        <ModalNoSsr open={open} setOpen={setOpen} />
+      </Toolbar>
     </AppBar>
   );
 }
