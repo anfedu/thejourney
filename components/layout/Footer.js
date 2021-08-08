@@ -9,11 +9,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: theme.spacing(6.83),
     textAlign: "center",
-    position: "relative",
-    bottom: "0%",
     color: "white",
     fontSize: 18,
     fontWeight: 400,
+    marginTop: 100,
     [theme.breakpoints.down("sm")]: {
       paddingTop: theme.spacing(1.9),
     },
