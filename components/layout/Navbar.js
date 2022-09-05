@@ -117,13 +117,13 @@ export default function Navbar({}) {
           >
             Login
           </Button>
-          <Button
+          {/*<Button
             variant="contained"
             className={classes.register}
             onClick={handleClickRegister}
           >
             Register
-          </Button>
+          </Button>*/}
         </Box>
         <Drawer
           user={user}

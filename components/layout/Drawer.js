@@ -134,13 +134,13 @@ export default function SwipeableTemporaryDrawer({
             </Button>
           </ListItem>
           <ListItem>
-            <Button
+            {/*<Button
               variant="contained"
               className={classes.register}
               onClick={handleClickRegister}
             >
               Register
-            </Button>
+            </Button>*/}
           </ListItem>
         </List>
       )}
