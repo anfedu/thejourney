@@ -1,27 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Dialog, DialogContent, Slide } from "@material-ui/core";
+import { Dialog, DialogContent, Fade } from "@material-ui/core";
 import Login from "./Login";
 import Register from "./Register";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../src/Provider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 416,
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
-    },
-  },
-  container: {
-    [theme.breakpoints.down("xs")]: {
-      marginTop: -100,
-    },
-  },
-}));
-
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />;
+  return <Fade direction="in" ref={ref} {...props} />;
 });
 
 export default function ModalLogin({ open, setOpen }) {
@@ -62,7 +48,8 @@ export default function ModalLogin({ open, setOpen }) {
   };
 
   function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const res = re.test(email);
     return res;
   }
@@ -136,6 +123,8 @@ export default function ModalLogin({ open, setOpen }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        fullWidth
+        maxWidth="sm"
       >
         <DialogContent className={classes.root}>
           <img
@@ -194,3 +183,14 @@ export default function ModalLogin({ open, setOpen }) {
     </>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  container: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: -100,
+    },
+  },
+}));

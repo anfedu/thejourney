@@ -4,51 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    [theme.breakpoints.down("xs")]: {
-      marginTop: theme.spacing(2),
-    },
-  },
-  form: {
-    marginTop: theme.spacing(5),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    textTransform: "none",
-    fontWeight: "bold",
-    backgroundColor: "#2E86DE",
-    color: "white",
-    height: 50,
-    fontSize: 24,
-  },
-  alert: {
-    margin: "5px 0",
-    border: "1px solid rgba(156, 39, 176, 0.8)",
-    borderRadius: 5,
-    width: "100%",
-    backgroundColor: "rgba(156, 39, 176, 0.2)",
-  },
-  cssLabel: {
-    color: "pink",
-  },
-  cssOutlinedInput: {
-    backgroundColor: "#E5E5E5",
-  },
-  cssFocused: {
-    fontWeight: 600,
-    color: "#777",
-  },
-  notchedOutline: {
-    borderColor: "white",
-    border: "none",
-  },
-}));
-
 export default function Register({
   errors,
   isLoading,
@@ -150,3 +105,49 @@ export default function Register({
     </div>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(3),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: theme.spacing(2),
+    },
+    paddingBottom: 30,
+  },
+  form: {
+    marginTop: theme.spacing(5),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    textTransform: "none",
+    fontWeight: "bold",
+    backgroundColor: "#2E86DE",
+    color: "white",
+    height: 50,
+    fontSize: 24,
+  },
+  alert: {
+    margin: "5px 0",
+    border: "1px solid rgba(156, 39, 176, 0.8)",
+    borderRadius: 5,
+    width: "100%",
+    backgroundColor: "rgba(156, 39, 176, 0.2)",
+  },
+  cssLabel: {
+    color: "pink",
+  },
+  cssOutlinedInput: {
+    backgroundColor: "#E5E5E5",
+  },
+  cssFocused: {
+    fontWeight: 600,
+    color: "#777",
+  },
+  notchedOutline: {
+    borderColor: "white",
+    border: "none",
+  },
+}));

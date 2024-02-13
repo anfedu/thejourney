@@ -9,12 +9,13 @@
     "clsx": "latest",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "eslint-config-next": "13",
     "html-to-draftjs": "^1.5.0",
     "immutable": "^4.0.0-rc.12",
-    "next": "latest",
+    "next": "13",
     "prop-types": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.14.5"
   },
   "scripts": {

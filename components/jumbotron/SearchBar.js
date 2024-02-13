@@ -11,97 +11,9 @@ import { CardTrip } from "../../src/CardFormat";
 import CardTripSkeleton from "../skeleton/CardTripSkeleton";
 import { AuthContext } from "../../src/Provider";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    backgroundColor: "#2E86DE",
-    height: 50,
-    color: "white",
-    textTransform: "none",
-    fontSize: 18,
-    fontWeight: "bold",
-    "&:hover": {
-      backgroundColor: "#3fa7ff",
-    },
-    [theme.breakpoints.down("xs")]: {
-      position: "absolute",
-      width: 50,
-      right: theme.spacing(1.2),
-    },
-  },
-  cssLabel: {
-    color: "pink",
-  },
-  cssOutlinedInput: {
-    backgroundColor: "white",
-    height: 50,
-  },
-  cssFocused: {
-    fontWeight: 600,
-    border: "2px solid aqua",
-    color: "#777",
-    "&:hover": {
-      border: "2px solid aqua",
-    },
-  },
-  notchedOutline: {
-    borderColor: "white",
-    border: "none",
-  },
-  search: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-  icon: {
-    fontSize: 30,
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 25,
-    },
-  },
-  card: {
-    width: "100%",
-    textDecoration: "none",
-    height: 57,
-    backgroundColor: "rgba(244, 244, 244, 0.9)",
-    "&:hover": { backgroundColor: "#eee" },
-  },
-  locationicon: {
-    color: "red",
-  },
-  bodytitle: {
-    marginLeft: -40,
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: -20,
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: 3,
-    },
-  },
-  cardContent: {
-    [theme.breakpoints.down("xs")]: {
-      paddingLeft: 5,
-      paddingRight: 7,
-    },
-  },
-  alert: {
-    opacity: 0.9,
-  },
-  searchContainer: {
-    padding: "0 5%",
-    marginBottom: "3%",
-    [theme.breakpoints.down("xs")]: {
-      padding: "0 1%",
-    },
-  },
-}));
-
 export default function SearchBar() {
   const errors = false;
   const classes = useStyles();
-  const theme = useTheme();
   const ref = React.useRef();
   const [isLoading, setIsLoading] = React.useState(false);
   // const matches = theme.breakpoints.down("xs");
@@ -145,7 +57,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Grid container spacing={0} style={{ marginTop: 10 }}>
+    <>
       <Grid container spacing={0} className={classes.searchContainer}>
         <Grid item xs={10} sm={10} md={10} lg={10}>
           <TextField
@@ -292,6 +204,93 @@ export default function SearchBar() {
           </Grid>
         ))
       )}
-    </Grid>
+    </>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: "#2E86DE",
+    height: 50,
+    color: "white",
+    textTransform: "none",
+    fontSize: 18,
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#3fa7ff",
+    },
+    [theme.breakpoints.down("xs")]: {
+      position: "absolute",
+      width: 50,
+      right: theme.spacing(1.2),
+    },
+  },
+  cssLabel: {
+    color: "pink",
+  },
+  cssOutlinedInput: {
+    backgroundColor: "white",
+    height: 50,
+  },
+  cssFocused: {
+    fontWeight: 600,
+    border: "2px solid aqua",
+    color: "#777",
+    "&:hover": {
+      border: "2px solid aqua",
+    },
+  },
+  notchedOutline: {
+    borderColor: "white",
+    border: "none",
+  },
+  search: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  icon: {
+    fontSize: 30,
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 25,
+    },
+  },
+  card: {
+    width: "100%",
+    textDecoration: "none",
+    height: 57,
+    backgroundColor: "rgba(244, 244, 244, 0.9)",
+    "&:hover": { backgroundColor: "#eee" },
+  },
+  locationicon: {
+    color: "red",
+  },
+  bodytitle: {
+    marginLeft: -40,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: -20,
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 3,
+    },
+  },
+  cardContent: {
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: 5,
+      paddingRight: 7,
+    },
+  },
+  alert: {
+    opacity: 0.9,
+  },
+  searchContainer: {
+    padding: "0 5%",
+    marginBottom: "3%",
+    [theme.breakpoints.down("xs")]: {
+      padding: "0 1%",
+    },
+  },
+}));

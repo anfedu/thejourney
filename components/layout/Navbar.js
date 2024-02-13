@@ -15,6 +15,69 @@ const ModalNoSsr = dynamic(() => import("./Modal"), {
   ssr: false,
 });
 
+export default function Navbar({}) {
+  const classes = useStyles();
+  const router = useRouter();
+  const context = useContext(AuthContext);
+  const { user, logout } = context;
+
+  const [open, setOpen] = React.useState({
+    login: false,
+    register: false,
+    modal: "",
+  });
+
+  const handleClickLogin = () => {
+    setOpen({ modal: "login", login: true });
+  };
+
+  const handleClickRegister = () => {
+    setOpen({ modal: "register", register: true });
+  };
+
+  return (
+    <AppBar
+      id="header"
+      color="transparent"
+      position="relative"
+      className={classes.appbar}
+    >
+      <Toolbar className={classes.toolbar}>
+        <Link href="/">
+          <img
+            src="/Icon.png"
+            className={classes.icon}
+            alt="The journey icon"
+          />
+        </Link>
+        <Box className={classes.linkWrap}>
+          <Button
+            variant="contained"
+            className={classes.login}
+            onClick={handleClickLogin}
+          >
+            Login
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.register}
+            onClick={handleClickRegister}
+          >
+            Register
+          </Button>
+        </Box>
+        <Drawer
+          user={user}
+          logout={logout}
+          handleClickLogin={handleClickLogin}
+          handleClickRegister={handleClickRegister}
+        />
+        <ModalNoSsr open={open} setOpen={setOpen} />
+      </Toolbar>
+    </AppBar>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
@@ -73,66 +136,3 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export default function Navbar({}) {
-  const classes = useStyles();
-  const router = useRouter();
-  const context = useContext(AuthContext);
-  const { user, logout } = context;
-
-  const [open, setOpen] = React.useState({
-    login: false,
-    register: false,
-    modal: "",
-  });
-
-  const handleClickLogin = () => {
-    setOpen({ modal: "login", login: true });
-  };
-
-  const handleClickRegister = () => {
-    setOpen({ modal: "register", register: true });
-  };
-
-  return (
-    <AppBar
-      id="header"
-      color="transparent"
-      position="relative"
-      className={classes.appbar}
-    >
-      <Toolbar className={classes.toolbar}>
-        <Link href="/">
-          <img
-            src="/Icon.png"
-            className={classes.icon}
-            alt="The journey icon"
-          />
-        </Link>
-        <Box className={classes.linkWrap}>
-          <Button
-            variant="contained"
-            className={classes.login}
-            onClick={handleClickLogin}
-          >
-            Login
-          </Button>
-          {/*<Button
-            variant="contained"
-            className={classes.register}
-            onClick={handleClickRegister}
-          >
-            Register
-          </Button>*/}
-        </Box>
-        <Drawer
-          user={user}
-          logout={logout}
-          handleClickLogin={handleClickLogin}
-          handleClickRegister={handleClickRegister}
-        />
-        <ModalNoSsr open={open} setOpen={setOpen} />
-      </Toolbar>
-    </AppBar>
-  );
-}

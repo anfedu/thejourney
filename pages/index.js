@@ -7,21 +7,6 @@ import { AuthContext } from "../src/Provider";
 import LayoutHome from "../components/layout/Home";
 import Layout from "../components/layout";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: "90.5vh",
-    [theme.breakpoints.down("md")]: {
-      minHeight: "91.7vh",
-    },
-    [theme.breakpoints.down("sm")]: {
-      minHeight: "91.7vh",
-    },
-    [theme.breakpoints.down("xs")]: {
-      minHeight: "93.3vh",
-    },
-  },
-}));
-
 export default function Index() {
   const classes = useStyles();
   const context = React.useContext(AuthContext);
@@ -47,3 +32,18 @@ export default function Index() {
     </>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "90.5vh",
+    [theme.breakpoints.down("md")]: {
+      minHeight: "91.7vh",
+    },
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "91.7vh",
+    },
+    [theme.breakpoints.down("xs")]: {
+      minHeight: "93.3vh",
+    },
+  },
+}));

@@ -3,6 +3,23 @@ import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import SearchBar from "../jumbotron/SearchBar";
 
+export default function Index() {
+  const classes = useStyles();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <Grid container spacing={0} className={classes.container}>
+      <Typography variant="h3" className={classes.title}>
+        Journey
+      </Typography>
+      <SearchBar />
+    </Grid>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
@@ -20,22 +37,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
     fontSize: 48,
     fontWeight: 900,
+    padding: "0 5%",
   },
 }));
-
-export default function Index() {
-  const classes = useStyles();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <Grid container spacing={0} className={classes.container}>
-      <Typography variant="h3" className={classes.title}>
-        Journey
-      </Typography>
-      <SearchBar />
-    </Grid>
-  );
-}
