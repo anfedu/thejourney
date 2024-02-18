@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     height: 50,
     width: 213,
-    fontFamily: "Roboto",
     fontWeight: "bold",
     [theme.breakpoints.down("xs")]: {
       height: 30,

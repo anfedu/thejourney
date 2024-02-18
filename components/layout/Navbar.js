@@ -45,7 +45,7 @@ export default function Navbar({}) {
       <Toolbar className={classes.toolbar}>
         <Link href="/">
           <img
-            src="/Icon.png"
+            src="/icon.svg"
             className={classes.icon}
             alt="The journey icon"
           />

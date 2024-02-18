@@ -5,6 +5,106 @@ import { Box, List, Button, ListItem, Avatar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import UserMenu from "./UserMenu";
 
+export default function SwipeableTemporaryDrawer({
+  user,
+  logout,
+  handleClickLogin,
+  handleClickRegister,
+}) {
+  const classes = useStyles();
+  const [state, setState] = useState({
+    right: false,
+    drawer: "open",
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  const ListMenu = () => (
+    <Box
+      onClick={() => setState({ right: false })}
+      className={classes.listContainer}
+      component="div"
+    >
+      {Object.values(user)[0] !== null ? (
+        <UserMenu user={user} logout={logout} drawerState={state.drawer} />
+      ) : (
+        <List>
+          <ListItem>
+            <Button
+              variant="contained"
+              className={classes.login}
+              onClick={handleClickLogin}
+            >
+              Login
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              variant="contained"
+              className={classes.register}
+              onClick={handleClickRegister}
+            >
+              Register
+            </Button>
+          </ListItem>
+        </List>
+      )}
+    </Box>
+  );
+
+  function randomColor(string) {
+    return "#f" + string.slice(1, 6);
+  }
+
+  return (
+    <div className={classes.menuWrapper}>
+      <React.Fragment>
+        <Button onClick={toggleDrawer("top", true)}>
+          {Object.values(user)[0] !== null ? (
+            <Avatar
+              src={
+                user.profile && `${process.env.server}/images/${user.profile}`
+              }
+              className={classes.avatar}
+              style={{
+                backgroundColor: randomColor(user.phone ? user.phone : "pink"),
+              }}
+            >
+              {user?.username?.slice(0, 1).toUpperCase()}
+            </Avatar>
+          ) : (
+            <MenuIcon
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            />
+          )}
+        </Button>
+        <MobilRightMenuSlider
+          classes={{
+            paper: classes.paper,
+          }}
+          anchor={"top"}
+          open={state.top}
+          onClose={toggleDrawer("top", false)}
+        >
+          <ListMenu />
+        </MobilRightMenuSlider>
+      </React.Fragment>
+    </div>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: "rgba(0,0,0, 0.7)",
@@ -58,7 +158,6 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     fontWeight: "bold",
     boxShadow: "none",
-    fontFamily: "Open Sans",
     "&:hover": {
       background: "none",
       border: "1px solid white",
@@ -74,7 +173,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     textTransform: "none",
     boxShadow: "none",
-    fontFamily: "Open Sans",
     "&:hover": {
       backgroundColor: "#2E86DE",
       border: "none",
@@ -90,103 +188,3 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export default function SwipeableTemporaryDrawer({
-  user,
-  logout,
-  handleClickLogin,
-  handleClickRegister,
-}) {
-  const classes = useStyles();
-  const [state, setState] = useState({
-    right: false,
-    drawer: "open",
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
-
-  const ListMenu = () => (
-    <Box
-      onClick={() => setState({ right: false })}
-      className={classes.listContainer}
-      component="div"
-    >
-      {Object.values(user)[0] !== null ? (
-        <UserMenu user={user} logout={logout} drawerState={state.drawer} />
-      ) : (
-        <List>
-          <ListItem>
-            <Button
-              variant="contained"
-              className={classes.login}
-              onClick={handleClickLogin}
-            >
-              Login
-            </Button>
-          </ListItem>
-          <ListItem>
-            {/*<Button
-              variant="contained"
-              className={classes.register}
-              onClick={handleClickRegister}
-            >
-              Register
-            </Button>*/}
-          </ListItem>
-        </List>
-      )}
-    </Box>
-  );
-
-  function randomColor(string) {
-    return "#f" + string.slice(1, 6);
-  }
-
-  return (
-    <div className={classes.menuWrapper}>
-      <React.Fragment>
-        <Button onClick={toggleDrawer("top", true)}>
-          {Object.values(user)[0] !== null ? (
-            <Avatar
-              src={
-                user.profile && `${process.env.server}/images/${user.profile}`
-              }
-              className={classes.avatar}
-              style={{
-                backgroundColor: randomColor(user.phone ? user.phone : "pink"),
-              }}
-            >
-              {user?.username?.slice(0, 1).toUpperCase()}
-            </Avatar>
-          ) : (
-            <MenuIcon
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            />
-          )}
-        </Button>
-        <MobilRightMenuSlider
-          classes={{
-            paper: classes.paper,
-          }}
-          anchor={"top"}
-          open={state.top}
-          onClose={toggleDrawer("top", false)}
-        >
-          <ListMenu />
-        </MobilRightMenuSlider>
-      </React.Fragment>
-    </div>
-  );
-}

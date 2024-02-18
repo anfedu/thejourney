@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   body: {
-    fontFamily: "Nunito",
     fontSize: 14,
     color: "#959595",
     [theme.breakpoints.down("xs")]: {
@@ -62,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   subtitle: {
-    fontFamily: "Nunito",
     fontSize: 18,
     fontWeight: 800,
     [theme.breakpoints.down("xs")]: {
@@ -73,14 +71,12 @@ const useStyles = makeStyles((theme) => ({
   book: {
     fontSize: 36,
     fontWeight: "bold",
-    fontFamily: "Nunito",
     marginTop: 10,
     [theme.breakpoints.down("xs")]: {
       fontSize: 23,
     },
   },
   date: {
-    fontFamily: "Nunito",
     fontSize: 18,
     color: "#878787",
     fontWeight: 300,

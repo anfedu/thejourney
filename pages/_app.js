@@ -6,6 +6,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import { AuthProvider } from "../src/Provider";
 import { QueryProvider } from "../src/Query";
+import { Poppins } from "next/font/google";
+const fontClass = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -30,8 +36,10 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <QueryProvider>
-            <CssBaseline />
-            <Component {...pageProps} />
+            <main className={fontClass.className}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </main>
           </QueryProvider>
         </AuthProvider>
       </ThemeProvider>

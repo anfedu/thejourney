@@ -15,69 +15,6 @@ const ModalNoSsr = dynamic(() => import("./Modal"), {
   ssr: false,
 });
 
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  appbar: {
-    margin: 0,
-    [theme.breakpoints.up("lg")]: {
-      height: theme.spacing(9),
-      padding: "0 5.3%",
-    },
-  },
-  toolbar: {
-    display: "flext",
-    justifyContent: "space-between",
-  },
-  register: {
-    backgroundColor: "#2E86DE",
-    color: "white",
-    textTransform: "none",
-    height: 30,
-    width: 100,
-    fontWeight: "bold",
-    boxShadow: "none",
-    "&:hover": {
-      background: "none",
-      border: "1px solid white",
-    },
-  },
-  login: {
-    background: "none",
-    border: "1px solid white",
-    color: "white",
-    marginRight: 10,
-    height: 30,
-    width: 100,
-    fontWeight: "bold",
-    textTransform: "none",
-    boxShadow: "none",
-    "&:hover": {
-      backgroundColor: "#2E86DE",
-      border: "none",
-    },
-  },
-  icon: {
-    cursor: "pointer",
-    [theme.breakpoints.down("md")]: {
-      position: "absolute",
-      left: 0,
-      top: 0,
-    },
-    [theme.breakpoints.down("xs")]: {
-      position: "absolute",
-      left: -5,
-      width: 170,
-    },
-  },
-  linkWrap: {
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-}));
-
 export default function Navbar({}) {
   const classes = useStyles();
   const router = useRouter();
@@ -142,3 +79,66 @@ export default function Navbar({}) {
     </AppBar>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  appbar: {
+    margin: 0,
+    [theme.breakpoints.up("lg")]: {
+      height: theme.spacing(9),
+      padding: "0 5.3%",
+    },
+  },
+  toolbar: {
+    display: "flext",
+    justifyContent: "space-between",
+  },
+  register: {
+    backgroundColor: "#2E86DE",
+    color: "white",
+    textTransform: "none",
+    height: 30,
+    width: 100,
+    fontWeight: "bold",
+    boxShadow: "none",
+    "&:hover": {
+      background: "none",
+      border: "1px solid white",
+    },
+  },
+  login: {
+    background: "none",
+    border: "1px solid white",
+    color: "white",
+    marginRight: 10,
+    height: 30,
+    width: 100,
+    fontWeight: "bold",
+    textTransform: "none",
+    boxShadow: "none",
+    "&:hover": {
+      backgroundColor: "#2E86DE",
+      border: "none",
+    },
+  },
+  icon: {
+    cursor: "pointer",
+    [theme.breakpoints.down("md")]: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+    },
+    [theme.breakpoints.down("xs")]: {
+      position: "absolute",
+      left: -5,
+      width: 170,
+    },
+  },
+  linkWrap: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  },
+}));

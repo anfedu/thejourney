@@ -84,8 +84,13 @@ export default function ModalLogin({ open, setOpen }) {
       body: JSON.stringify(logins || registers),
     };
 
-    const response = await fetch(url, config);
-    const data = await response.json(logins || registers);
+    // const response = await fetch(url, config);
+    // const data = await response.json(logins || registers);
+
+    const data = {
+      status: 200,
+      data: staticValues,
+    };
 
     setIsLoading(false);
     if (data.status === 500) {
@@ -93,17 +98,9 @@ export default function ModalLogin({ open, setOpen }) {
     }
 
     if (data.status === 200) {
-      router.prefetch("/");
       context.login(data.data);
       handleClose();
-      setLogins({ email: "", password: "" });
-      setRegisters({
-        username: "",
-        email: "",
-        password: "",
-        phone: "",
-        address: "",
-      });
+      router.prefetch("/");
     }
     return data;
   };
@@ -194,3 +191,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+let staticValues = {
+  email: "nuril@thejourney.com",
+  password: "123456",
+  username: "ahmad_nuril_firdaus",
+  phone: "082394875743",
+  token: "123456",
+};

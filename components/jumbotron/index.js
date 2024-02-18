@@ -2,6 +2,28 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
 
+export default function Jumbotron() {
+  const classes = useStyles();
+  return (
+    <Box className={classes.root}>
+      <Typography variant="h3" className={classes.title}>
+        The Journey
+      </Typography>
+      <Typography variant="h3" className={classes.title}>
+        You ever dreamed of.
+      </Typography>
+      <br />
+      <br />
+      <Typography variant="body1" className={classes.body}>
+        We made a tool so you can easily keep & share your travel memories.
+      </Typography>
+      <Typography variant="body1" className={classes.body}>
+        But there is a lot more
+      </Typography>
+    </Box>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: 500,
@@ -19,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: 700,
-    fontFamily: "Poppins",
     transition: "width 2s, height 4s",
     fontSize: 64,
     [theme.breakpoints.down("sm")]: {
@@ -33,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
   },
   subTitle: {
     fontSize: 64,
-    fontFamily: "Poppins",
     fontWeight: 200,
     letterSpacing: -2,
     animation: `$skeletons 1200ms`,
@@ -48,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   body: {
-    fontFamily: "Roboto",
     fontWeight: 400,
     fontSize: 24,
     [theme.breakpoints.down("sm")]: {
@@ -71,25 +90,3 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export default function Jumbotron() {
-  const classes = useStyles();
-  return (
-    <Box className={classes.root}>
-      <Typography variant="h3" className={classes.title}>
-        The Journey
-      </Typography>
-      <Typography variant="h3" className={classes.title}>
-        You ever dreamed of.
-      </Typography>
-      <br />
-      <br />
-      <Typography variant="body1" className={classes.body}>
-        We made a tool so you can easily keep & share your travel memories.
-      </Typography>
-      <Typography variant="body1" className={classes.body}>
-        But there is a lot more
-      </Typography>
-    </Box>
-  );
-}

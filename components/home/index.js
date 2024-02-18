@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(3),
+    marginBottom: 10,
     fontSize: 48,
     fontWeight: 900,
     padding: "0 5%",
