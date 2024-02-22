@@ -12,7 +12,7 @@ export function CardTrip({ item, user }) {
   const handleDetail = () => {
     router.push({
       pathname: "/journey",
-      query: { id: item.id, username: item.user.username },
+      query: { id: item?.id, username: item?.user?.username },
       asPath: `/journey/${item.id}`,
     });
   };
@@ -26,13 +26,10 @@ export function CardTrip({ item, user }) {
         onError={() => {}}
         src={`/images/${item.image}`}
         alt=""
+        onClick={handleDetail}
       />
       <Box variant="div" className={classes.container}>
-        <Typography
-          variant="h6"
-          className={classes.title}
-          onClick={handleDetail}
-        >
+        <Typography variant="h6" className={classes.title}>
           {formatString(item.title, 23)}
         </Typography>
         <Typography
@@ -82,13 +79,13 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
+    cursor: "pointer",
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "justify",
     marginTop: 5,
-    cursor: "pointer",
   },
   description: {
     marginTop: 10,
