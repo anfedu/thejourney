@@ -49,10 +49,10 @@ export default function SearchBar() {
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 300);
       setTimeout(() => {
         setOpen(true);
-      }, 1510);
+      }, 305);
     }
   };
 
@@ -98,7 +98,7 @@ export default function SearchBar() {
               setTimeout(() => {
                 setIsLoading(false);
                 setOpen(true);
-              }, 1500);
+              }, 300);
             }}
           >
             {isLoading ? (
@@ -166,30 +166,12 @@ export default function SearchBar() {
             ))
           : open && Object.keys(values.search).length > 0
           ? data.map((item, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                key={index}
-                align="center"
-                style={{ marginTop: 23 }}
-              >
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                 <CardTrip index={index} item={item} user={user} />
               </Grid>
             ))
           : rows.map((item, index) => (
-              <Grid
-                item
-                key={index}
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                style={{ marginTop: 23 }}
-                align="center"
-              >
+              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
                 <CardTrip index={index} item={item} user={user} />
               </Grid>
             ))}
@@ -224,11 +206,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cssFocused: {
     fontWeight: 600,
-    border: "2px solid aqua",
-    color: "#777",
-    "&:hover": {
-      border: "2px solid aqua",
-    },
   },
   notchedOutline: {
     borderColor: "white",
@@ -287,23 +264,44 @@ const useStyles = makeStyles((theme) => ({
 
 let rows = [
   {
-    title: "Testing",
+    title: "Jakarta",
+    image: "jakarta.png",
+    createdAt: new Date("2022-01-01"),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+  {
+    title: "Lembang",
     image: "lembang.jpg",
     createdAt: new Date(),
     description:
       "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
   },
   {
-    title: "Testing",
-    image: "lembang.jpg",
-    createdAt: new Date(),
+    title: "Japan",
+    image: "japan.jpg",
+    createdAt: new Date("2021-03-03"),
     description:
       "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
   },
   {
-    title: "Testing",
-    image: "lembang.jpg",
-    createdAt: new Date(),
+    title: "Desert",
+    image: "desert.jpg",
+    createdAt: new Date("2023-04-05"),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+  {
+    title: "Malaysia",
+    image: "malaysia.jpg",
+    createdAt: new Date("2023-01-07"),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+  {
+    title: "Kepulauan Seribu",
+    image: "kepulauan.jpg",
+    createdAt: new Date("2023-03-09"),
     description:
       "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
   },

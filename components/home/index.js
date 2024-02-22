@@ -12,10 +12,12 @@ export default function Index() {
 
   return (
     <Grid container spacing={0} className={classes.container}>
-      <Typography variant="h3" className={classes.title}>
-        Journey
-      </Typography>
-      <SearchBar />
+      <Grid item xs={12}>
+        <Typography variant="h3" className={classes.title}>
+          Journey
+        </Typography>
+        <SearchBar />
+      </Grid>
     </Grid>
   );
 }
@@ -24,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
     padding: "0 2.5% 3% 2.5%",
-    minHeight: "30vh",
     backgroundColor: "#E5E5E5",
     zIndex: 999,
     marginTop: -theme.spacing(7.6),

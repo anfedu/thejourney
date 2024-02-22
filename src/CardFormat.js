@@ -1,13 +1,11 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Card, Typography, Box, IconButton } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Card, Typography, Box } from "@material-ui/core";
 import { formatDate, formatString } from "./formatter";
 import { useRouter } from "next/router";
 import SubmitBookmark from "../components/bookmark/SubmitBookmark";
 
-const url = process.env.server;
-
-export function CardTrip({ item, index, user }) {
+export function CardTrip({ item, user }) {
   const classes = useStyles();
   const router = useRouter();
 
@@ -55,20 +53,6 @@ export function CardTrip({ item, index, user }) {
     </Card>
   );
 }
-// {formatString(item.editor.replace(/<p[^>]*>/g, ""), 150)}
-// <IconButton
-//   className={classes.bookmark}
-//   style={{
-//     backgroundColor: color,
-//   }}
-//   onClick={handleUpdate}
-// >
-//   {loading ? (
-//     <CircularProgress size={20} style={{ position: "absolute" }} />
-//   ) : (
-//     <img style={{ width: 20, height: 20 }} src="/bookmark.png" alt="" />
-//   )}
-// </IconButton>
 
 const useStyles = makeStyles((theme) => ({
   cardTrip: {

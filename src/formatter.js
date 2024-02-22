@@ -77,11 +77,8 @@ export function formatDateFull(newDate) {
 
 export function formatDate(newDate) {
   const d = new Date(newDate);
-  const date = d.getDate();
-  const monthName = month[d.getMonth()];
-  const year = d.getFullYear();
 
-  return date + " " + monthName + " " + year;
+  return d.toDateString();
 }
 
 export function dayName(newDate) {
