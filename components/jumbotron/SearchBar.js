@@ -58,7 +58,7 @@ export default function SearchBar() {
 
   return (
     <>
-      <Grid container spacing={0} className={classes.searchContainer}>
+      <Grid container spacing={3} className={classes.searchContainer}>
         <Grid item xs={10} sm={10} md={10} lg={10}>
           <TextField
             variant="outlined"
@@ -156,54 +156,44 @@ export default function SearchBar() {
           )
         )}
       </Grid>
-      {loading ? (
-        [1, 2, 3, 4].map((item, index) => (
-          <Grid
-            item
-            key={index}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            style={{ marginTop: 23 }}
-            align="center"
-          >
-            <CardTripSkeleton />
-          </Grid>
-        ))
-      ) : open && Object.keys(values.search).length > 0 ? (
-        <Grid container spacing={0}>
-          {data.map((item, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              key={index}
-              align="center"
-              style={{ marginTop: 23 }}
-            >
-              <CardTrip index={index} item={item} user={user} />
-            </Grid>
-          ))}
-        </Grid>
-      ) : (
-        rows.map((item, index) => (
-          <Grid
-            item
-            key={index}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            style={{ marginTop: 23 }}
-            align="center"
-          >
-            <CardTrip index={index} item={item} user={user} />
-          </Grid>
-        ))
-      )}
+
+      <Grid container spacing={3} className={classes.searchContainer}>
+        {loading
+          ? [1, 2, 3, 4].map((item, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                <CardTripSkeleton />
+              </Grid>
+            ))
+          : open && Object.keys(values.search).length > 0
+          ? data.map((item, index) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                key={index}
+                align="center"
+                style={{ marginTop: 23 }}
+              >
+                <CardTrip index={index} item={item} user={user} />
+              </Grid>
+            ))
+          : rows.map((item, index) => (
+              <Grid
+                item
+                key={index}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                style={{ marginTop: 23 }}
+                align="center"
+              >
+                <CardTrip index={index} item={item} user={user} />
+              </Grid>
+            ))}
+      </Grid>
     </>
   );
 }
