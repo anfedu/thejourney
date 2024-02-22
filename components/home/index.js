@@ -38,5 +38,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 48,
     fontWeight: 900,
     padding: "0 5%",
+    [theme.breakpoints.down("xs")]: {
+      padding: "0 1%",
+    },
   },
 }));

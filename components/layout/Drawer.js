@@ -38,7 +38,7 @@ export default function SwipeableTemporaryDrawer({
         <UserMenu user={user} logout={logout} drawerState={state.drawer} />
       ) : (
         <List>
-          <ListItem>
+          <ListItem style={{ justifyContent: "center" }}>
             <Button
               variant="contained"
               className={classes.login}
@@ -46,8 +46,6 @@ export default function SwipeableTemporaryDrawer({
             >
               Login
             </Button>
-          </ListItem>
-          <ListItem>
             <Button
               variant="contained"
               className={classes.register}

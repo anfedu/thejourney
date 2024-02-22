@@ -58,7 +58,7 @@ export default function SearchBar() {
 
   return (
     <>
-      <Grid container spacing={3} className={classes.searchContainer}>
+      <Grid container spacing={0} className={classes.searchContainer}>
         <Grid item xs={10} sm={10} md={10} lg={10}>
           <TextField
             variant="outlined"

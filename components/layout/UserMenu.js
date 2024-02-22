@@ -19,59 +19,6 @@ function randomColor(string) {
   return "#f" + string.slice(1, 6);
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    [theme.breakpoints.down("md")]: {
-      textAlign: "center",
-    },
-  },
-  menuMobileWrapper: {
-    background: "none",
-    color: "#ccc",
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
-  },
-  arrow: {
-    width: 0,
-    height: 0,
-    borderLeft: "15px solid transparent",
-    borderRight: "15px solid transparent",
-    borderBottom: "17px solid white",
-    position: "absolute",
-    top: -7,
-    right: theme.spacing(2.7),
-  },
-  menu: {
-    marginLeft: 13,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "black",
-    [theme.breakpoints.down("md")]: {
-      color: "white",
-    },
-  },
-  icon: { marginLeft: 20 },
-  iconLogout: {
-    marginLeft: "3.4%",
-    [theme.breakpoints.down("xs")]: { marginLeft: " 7.3%" },
-  },
-  menuItem: {
-    "&:hover": {
-      backgroundColor: "#444",
-    },
-  },
-  avatar: {
-    fontWeight: "bold",
-    fontSize: 25,
-    [theme.breakpoints.up("lg")]: {
-      width: 50,
-      height: 50,
-      // position: "absolute",
-    },
-  },
-}));
-
 export default function UserMenu({ user, logout, drawerState }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -257,3 +204,56 @@ export default function UserMenu({ user, logout, drawerState }) {
     </div>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+    },
+  },
+  menuMobileWrapper: {
+    background: "none",
+    color: "#ccc",
+    [theme.breakpoints.up("lg")]: {
+      display: "none",
+    },
+  },
+  arrow: {
+    width: 0,
+    height: 0,
+    borderLeft: "15px solid transparent",
+    borderRight: "15px solid transparent",
+    borderBottom: "17px solid white",
+    position: "absolute",
+    top: -7,
+    right: theme.spacing(2.7),
+  },
+  menu: {
+    marginLeft: 13,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
+    [theme.breakpoints.down("md")]: {
+      color: "white",
+    },
+  },
+  icon: { marginLeft: 20 },
+  iconLogout: {
+    marginLeft: "3.4%",
+    [theme.breakpoints.down("xs")]: { marginLeft: " 7.3%" },
+  },
+  menuItem: {
+    "&:hover": {
+      backgroundColor: "#444",
+    },
+  },
+  avatar: {
+    fontWeight: "bold",
+    fontSize: 25,
+    [theme.breakpoints.up("lg")]: {
+      width: 50,
+      height: 50,
+      // position: "absolute",
+    },
+  },
+}));

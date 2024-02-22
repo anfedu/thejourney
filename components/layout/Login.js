@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    paddingBottom: 20,
     [theme.breakpoints.down("xs")]: {
       marginTop: theme.spacing(2),
     },

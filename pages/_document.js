@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
         </Head>
         <body
           style={{
-            // overflowX: "hidden",
+            overflowX: "hidden",
             scrollBehavior: "smooth",
           }}
         >
