@@ -29,9 +29,9 @@ export default function SearchBar() {
     getJourneyUser(1);
   }, []);
 
-  const rows = [...state.journeyUser].filter((item, index) => {
-    return index < 8;
-  });
+  // const rows = [...state.journeyUser].filter((item, index) => {
+  //   return index < 8;
+  // });
 
   useOutsideClick(ref, () => {
     setOpen(false);
@@ -284,3 +284,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+let rows = [
+  {
+    title: "Testing",
+    image: "lembang.jpg",
+    createdAt: new Date(),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+  {
+    title: "Testing",
+    image: "lembang.jpg",
+    createdAt: new Date(),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+  {
+    title: "Testing",
+    image: "lembang.jpg",
+    createdAt: new Date(),
+    description:
+      "Lorem explicabo doloribus rem exercitationem quaerat. Culpa ducimus accusamus vel commodi at? Earum explicabo saepe rerum labore molestias Esse itaque debitis dolorum impedit accusantium amet quisquam molestiae ipsum Natus aut.",
+  },
+];

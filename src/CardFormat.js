@@ -3,18 +3,83 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Card, Typography, Box, IconButton } from "@material-ui/core";
 import { formatDate, formatString } from "./formatter";
 import { useRouter } from "next/router";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import SubmitBookmark from "../components/bookmark/SubmitBookmark";
+
+const url = process.env.server;
+
+export function CardTrip({ item, index, user }) {
+  const classes = useStyles();
+  const router = useRouter();
+
+  const handleDetail = () => {
+    router.push({
+      pathname: "/journey",
+      query: { id: item.id, username: item.user.username },
+      asPath: `/journey/${item.id}`,
+    });
+  };
+
+  return (
+    <Card className={classes.cardTrip}>
+      <SubmitBookmark bookmark={classes.bookmark} user={user} item={item} />
+      <img
+        className={classes.media}
+        onLoad={() => {}}
+        onError={() => {}}
+        src={`/images/${item.image}`}
+        alt=""
+      />
+      <Box variant="div" className={classes.container}>
+        <Typography
+          variant="h6"
+          className={classes.title}
+          onClick={handleDetail}
+        >
+          {formatString(item.title, 23)}
+        </Typography>
+        <Typography
+          variant="body2"
+          style={{
+            textAlign: "justify",
+            marginTop: 2,
+            fontSize: 12,
+            color: "#666",
+          }}
+        >
+          {formatDate(item.createdAt)}
+        </Typography>
+        <Typography variant="body1" className={classes.description}>
+          {formatString(item?.description, 150)}
+        </Typography>
+      </Box>
+    </Card>
+  );
+}
+// {formatString(item.editor.replace(/<p[^>]*>/g, ""), 150)}
+// <IconButton
+//   className={classes.bookmark}
+//   style={{
+//     backgroundColor: color,
+//   }}
+//   onClick={handleUpdate}
+// >
+//   {loading ? (
+//     <CircularProgress size={20} style={{ position: "absolute" }} />
+//   ) : (
+//     <img style={{ width: 20, height: 20 }} src="/bookmark.png" alt="" />
+//   )}
+// </IconButton>
 
 const useStyles = makeStyles((theme) => ({
   cardTrip: {
-    width: 300,
+    position: "relative",
+    width: "100%",
     height: 362,
-    borderRadius: 5,
     "&:hover": {
       backgroundColor: "#ffffee",
     },
     animation: `$skeletons 1.2s ease`,
+    borderRadius: 16,
   },
   "@keyframes skeletons": {
     "0%": {
@@ -30,7 +95,9 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: "100%",
     height: 180,
-    borderRadius: 5,
+    border: "none",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   title: {
     fontSize: 18,
@@ -40,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   description: {
-    marginTop: theme.spacing(2),
+    marginTop: 10,
     fontWeight: 400,
     fontSize: 14,
     textAlign: "justify",
@@ -97,8 +164,8 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     width: 30,
     height: 30,
-    marginTop: "0.7%",
-    marginLeft: theme.spacing(32.5),
+    top: 10,
+    right: 10,
     zIndex: 999,
     "&:hover": {
       opacity: 0.8,
@@ -106,72 +173,3 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const url = process.env.server;
-
-export function CardTrip({ item, index, user }) {
-  const classes = useStyles();
-  const router = useRouter();
-
-  const handleDetail = () => {
-    router.push({
-      pathname: "/journey",
-      query: { id: item.id, username: item.user.username },
-      asPath: `/journey/${item.id}`,
-    });
-  };
-
-  return (
-    <Card className={classes.cardTrip}>
-      <SubmitBookmark bookmark={classes.bookmark} user={user} item={item} />
-      <img
-        className={classes.media}
-        onLoad={() => {}}
-        onError={() => {}}
-        src={`${url}/images/${item.image}`}
-        alt=""
-      />
-      <Box variant="div" className={classes.container}>
-        <Typography
-          variant="h6"
-          className={classes.title}
-          onClick={handleDetail}
-        >
-          {formatString(item.title, 23)}
-        </Typography>
-        <Typography
-          variant="body2"
-          style={{
-            textAlign: "justify",
-            marginTop: 2,
-            fontSize: 12,
-            color: "#bfbfbf",
-          }}
-        >
-          {formatDate(item.createdAt)}
-        </Typography>
-        <Typography variant="body1" className={classes.description}>
-          <section
-            dangerouslySetInnerHTML={{
-              __html: formatString(item.editor.replace(/<[^>]*>/g, ""), 150),
-            }}
-          />
-        </Typography>
-      </Box>
-    </Card>
-  );
-}
-// {formatString(item.editor.replace(/<p[^>]*>/g, ""), 150)}
-// <IconButton
-//   className={classes.bookmark}
-//   style={{
-//     backgroundColor: color,
-//   }}
-//   onClick={handleUpdate}
-// >
-//   {loading ? (
-//     <CircularProgress size={20} style={{ position: "absolute" }} />
-//   ) : (
-//     <img style={{ width: 20, height: 20 }} src="/bookmark.png" alt="" />
-//   )}
-// </IconButton>
