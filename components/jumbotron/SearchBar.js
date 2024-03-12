@@ -15,7 +15,7 @@ export default function SearchBar() {
   const errors = false;
   const classes = useStyles();
   const ref = React.useRef();
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   // const matches = theme.breakpoints.down("xs");
   const query = React.useContext(QueryContext);
   const { state, getJourneyUser, loading } = query;
