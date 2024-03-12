@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
     height: 350,
     padding: "7px 9px",
     borderRadius: 5,
-    marginTop: 30,
     cursor: "pointer",
     // marginInline: theme.spacing(2),
   },
