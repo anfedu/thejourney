@@ -34,7 +34,7 @@ function queryReducer(state, action) {
   }
 }
 function QueryProvider(props) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(queryReducer, {
     journey: [],
     journeyDetail: {},
